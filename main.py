@@ -10,6 +10,18 @@ con = sqlite3.connect('db.db', check_same_thread=False)
 # 데이터베이스에 SQL 명령어를 실행하는 도구
 cur = con.cursor()
 
+cur.execute(f"""
+            CREATE TABLE IF NOT EXISTS items (
+	              id INTEGER PRIMARY KEY,
+	              title TEXT NOT NULL,
+	              image BLOB,
+	              price INTEGER NOT NULL,
+	              description TEXT,
+	              place TEXT NOT NULL,
+	              insertAt INTEGER NOT NULL
+            );
+            """)
+
 app = FastAPI()
 
 # "/items"라는 주소로 POST 요청이 들어오면 이 함수를 실행
